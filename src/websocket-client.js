@@ -3,7 +3,7 @@ import { w3cwebsocket as W3cwebsocket, noop } from 'websocket';
 
 export class WebSocketClient {
   constructor() {
-    if (isDevelopment()) {
+    if (isDevelopment() || process.env.GITHUB_ACTION) {
       this.client = new W3cwebsocket(`ws://${document.location.hostname}:4000/socket/poker`);
     } else {
       this.client = new W3cwebsocket(`wss://${document.location.hostname}/socket/poker`);
