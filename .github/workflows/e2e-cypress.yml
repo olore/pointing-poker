@@ -11,8 +11,10 @@ jobs:
         uses: actions/checkout@v1
       - uses: cypress-io/github-action@v1
         with:
+          env:
+            NODE_ENV: production
           build: npm run build
-          start: NODE_ENV=production npm start
+          start: npm start
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
