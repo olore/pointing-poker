@@ -9,17 +9,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Use Node.js 12.x
-        # actions/setup-node@v1 (v1.3.0) = b6651e20e530d6e6b845a9828606779e89f5529c
-        uses: actions/setup-node@b6651e20e530d6e6b845a9828606779e89f5529c
-        with:
-          node-version: 12.x
-      - name: Install & Test
-        run: |
-          npm ci
-          npm run build
-          npm start
       - uses: cypress-io/github-action@v1
+        with:
+          build: npm run build
+          start: npm start
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
