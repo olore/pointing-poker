@@ -1,0 +1,21 @@
+name: End-to-end tests
+on: [push]
+env:
+  # Let Cypress know we are in an Action
+  CYPRESS_IN_GITHUB_ACTION: yup
+  NODE_ENV: production
+jobs:
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: cypress-io/github-action@v1
+        with:
+          build: npm run build
+          start: npm start
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
