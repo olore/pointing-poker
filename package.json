@@ -65,6 +65,7 @@
     "classnames": "^2.2.6",
     "concurrently": "^5.1.0",
     "cypress": "^4.3.0",
+    "cypress-terminal-report": "^1.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-react": "^7.19.0",

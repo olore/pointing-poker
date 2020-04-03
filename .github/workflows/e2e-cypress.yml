@@ -1,5 +1,8 @@
 name: End-to-end tests
 on: [push]
+env:
+  # Let Cypress know we are in an Action
+  CYPRESS_IN_GITHUB_ACTION: yup
 jobs:
   cypress-run:
     runs-on: ubuntu-16.04

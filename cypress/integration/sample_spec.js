@@ -5,19 +5,11 @@ const startButton = '.is-hidden-desktop > .is-primary';
 const nameInput = '[data-testid=text-input-firstName]';
 const joinButton = '[data-testid=add-player] > form > .field > :nth-child(2) > .button';
 
-let url = 'http://localhost:3000';
-
-if (process.env.GITHUB_ACTION) {
-  url = 'http://localhost:4000';
-}
+// reads CYPRESS_IN_GITHUB_ACTION from .github/workflows/ (removes CYPRESS_)
+let url = Cypress.env('IN_GITHUB_ACTION') ? 'http://localhost:4000' : 'http://localhost:3000';
 
 describe('The Home Page', function() {
   it('successfully loads', function() {
-    cy.log("hey it's brian");
-    cy.log(process.env);
-    cy.log(process.env.GITHUB_ACTION);
-    cy.log("bye it's brian");
-
     cy.visit(url);
   });
 
@@ -27,10 +19,7 @@ describe('The Home Page', function() {
     cy.get(nameInput).type('Bobby');
     cy.get(joinButton).click();
 
-    cy.screenshot('my-image');
-
-    // default 4s not enough for github action? //10s either ??
-    cy.get('.notification', { timeout: 30000 }).should('contain', 'You look lonely');
+    cy.get('.notification').should('contain', 'You look lonely');
     expect(cy.contains('2 Points')).to.exist;
   });
 });
