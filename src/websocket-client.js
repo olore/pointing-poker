@@ -4,9 +4,12 @@ import { w3cwebsocket as W3cwebsocket, noop } from 'websocket';
 export class WebSocketClient {
   constructor() {
     if (isProduction()) {
-      this.client = new W3cwebsocket(`wss://${document.location.hostname}/socket/poker`);
-    } else {
+      // this is backwards but wtf
+      // this.client = new W3cwebsocket(`wss://${document.location.hostname}/socket/poker`);
       this.client = new W3cwebsocket(`ws://${document.location.hostname}:4000/socket/poker`);
+    } else {
+      // this.client = new W3cwebsocket(`ws://${document.location.hostname}:4000/socket/poker`);
+      this.client = new W3cwebsocket(`wss://${document.location.hostname}/socket/poker`);
     }
   }
   register(gameId, playerId, listeners) {
